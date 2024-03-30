@@ -45,6 +45,7 @@ def process(df):
 
     df['Label'] = df['Label'].replace({'ham': 0, 'spam': 1})
     df = df[['Subject', 'Message', 'Label']]
+    df = df.sample(1000)
     print("Text Processing !!")
     df['Subject'] = cleaning(df['Subject'])
     df['Message'] = cleaning(df['Message'])
