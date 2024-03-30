@@ -9,6 +9,10 @@ from process import process
 from visualization import plot_spam_ham_count, confusion_matrix_plot
 import time
 import psutil
+import warnings
+
+# Disable all warnings
+warnings.filterwarnings("ignore")
 
 start_time = time.time()
 
@@ -89,7 +93,7 @@ rf_test_cm = confusion_matrix(y_test, rf_test_pred, normalize = 'all')
 coefficients = np.mean(logreg.coef_, axis=0)
 
 # Get the feature names (words)
-feature_names = vectorizer.get_feature_names_out()
+feature_names = vectorizer.get_feature_names()
 
 # Create a dictionary mapping words to their coefficients
 word_coefficients = dict(zip(feature_names, coefficients))
