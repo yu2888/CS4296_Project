@@ -3,7 +3,7 @@ import subprocess
 def install_pip():
     try:
         subprocess.check_call(['sudo', 'apt', 'update'])
-
+        subprocess.check_call(['sudo', 'apt-get', 'install', '-y','python3-tk'])
         # Install pip
         subprocess.check_call(['sudo', 'apt', 'install', '-y', 'python3-pip'])
         print("Installed pip successfully!")
