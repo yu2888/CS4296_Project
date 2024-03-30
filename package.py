@@ -1,9 +1,9 @@
 import subprocess
 
-def install_package_with_pip():
+def install_pip():
     try:
         subprocess.check_call(['sudo', 'apt', 'update'])
-        
+
         # Install pip
         process = subprocess.Popen(['sudo', 'apt', 'install', '-y', 'python3-pip'], stdin=subprocess.PIPE)
         
@@ -22,7 +22,7 @@ def install_package_with_pip(package_name):
         print(f"Failed to install package '{package_name}'.")
 
 # Usage example
-install_package_with_pip()
+install_pip()
 package_list = ['numpy', 'pandas', 'regex', 'nltk', 'scikit-learn', 'seaborn', 'matplotlib']
 for package in package_list:
     install_package_with_pip(package)
