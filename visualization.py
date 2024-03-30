@@ -1,6 +1,8 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+import matplotlib
+matplotlib.use('TkAgg')
 def plot_spam_ham_count(df):
 
     plt.figure(figsize=(8, 6))  # Set the desired width and height of the plot
