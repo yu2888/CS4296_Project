@@ -35,7 +35,7 @@ x_test = vectorizer.transform(x_test)
 
 # Logistic Regression 
 cs = [0.01, 0.1, 1, 10]
-logreg = LogisticRegressionCV(Cs=cs, cv=5, random_state=seed, n_jobs=4)
+logreg = LogisticRegressionCV(Cs=cs, cv=5, random_state=seed, n_jobs=2)
 logreg.fit(x_train, y_train)
 
 # Random Forest 
@@ -47,7 +47,7 @@ param_grid = {
 }
 
 # Perform grid search for Random Forest
-grid_search = GridSearchCV(random_forest, param_grid, cv=5, n_jobs=4)
+grid_search = GridSearchCV(random_forest, param_grid, cv=5, n_jobs=2)
 grid_search.fit(x_train, y_train)
 
 random_forest_best = grid_search.best_estimator_
