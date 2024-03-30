@@ -3,10 +3,13 @@ import subprocess
 def install_package_with_pip():
     try:
         subprocess.check_call(['sudo', 'apt', 'update'])
-        # Install pip
-        subprocess.check_call(['sudo', 'apt', 'install', '-y', 'python3-pip'])
-        print("Failed to install pip.")
         
+        # Install pip
+        process = subprocess.Popen(['sudo', 'apt', 'install', '-y', 'python3-pip'], stdin=subprocess.PIPE)
+        
+        # Provide input to the process to select the choice
+        process.communicate(input=b'\n')
+
     except subprocess.CalledProcessError:
         print("Failed to install pip.")
 
