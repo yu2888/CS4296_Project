@@ -8,7 +8,8 @@ def plot_spam_ham_count(df):
     plt.figure(figsize=(8, 6))  # Set the desired width and height of the plot
 
     # Create the countplot
-    ax = sns.countplot(data = df, x = 'Label')
+    custom_palette = ["#1f77b4", "#ff7f0e"]
+    ax = sns.countplot(data=df, x='Label', palette=custom_palette)
 
     # Add count labels on top of each bar
     for p in ax.patches:
