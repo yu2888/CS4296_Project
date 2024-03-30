@@ -2,6 +2,9 @@ from nltk.corpus import stopwords
 from string import punctuation 
 import re
 
+import nltk
+nltk.download('stopwords')
+
 def clean_punctuations(text):
     translator = str.maketrans('', '', punctuation)
     return text.translate(translator)
