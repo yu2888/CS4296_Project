@@ -21,8 +21,9 @@ def install_package_with_pip(package_name):
 
 # Usage example
 install_pip()
-package_list = ['numpy', 'pandas', 'regex', 'nltk', 'scikit-learn', 'seaborn', 'matplotlib']
+package_list = ['numpy', 'pandas', 'regex', 'nltk', 'scikit-learn', 'seaborn', 'matplotlib', 'psutil']
 for package in package_list:
     install_package_with_pip(package)
 
 print("Successfully installed all required packages")
+
