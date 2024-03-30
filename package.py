@@ -26,3 +26,5 @@ install_pip()
 package_list = ['numpy', 'pandas', 'regex', 'nltk', 'scikit-learn', 'seaborn', 'matplotlib']
 for package in package_list:
     install_package_with_pip(package)
+
+print("Successfully install all required packages")
