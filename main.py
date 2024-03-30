@@ -28,6 +28,7 @@ seed = 11
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=seed)
 
 vectorizer = CountVectorizer()
+print("Statr Training !!")
 
 # Convert text to BoW features
 x_train = vectorizer.fit_transform(x_train)
