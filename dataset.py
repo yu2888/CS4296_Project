@@ -14,5 +14,5 @@ def download_and_extract_zip(url):
         print("Failed to download the zip file.")
 
 # Usage example
-repo_url = 'https://github.com/MWiechmann/enron_spam_data/blob/master/enron_spam_data.zip'
+repo_url = 'https://github.com/MWiechmann/enron_spam_data/enron_spam_data.zip'
 download_and_extract_zip(repo_url)
