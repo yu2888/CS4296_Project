@@ -86,6 +86,8 @@ rf_test_precision = precision_score(y_test, rf_test_pred)
 logreg_test_cm = confusion_matrix(y_test, logreg_test_pred, normalize = 'all')
 rf_test_cm = confusion_matrix(y_test, rf_test_pred, normalize = 'all')
 
+cpu_after = psutil.cpu_percent(interval=None)
+
 # Average the coefficients across different iterations
 coefficients = np.mean(logreg.coef_, axis=0)
 
@@ -120,7 +122,6 @@ for word, coefficient in top_words:
     print(word, ":", coefficient)
 
 end_time = time.time() - start_time
-cpu_after = psutil.cpu_percent(interval=None)
 cpu_utilization = cpu_after - cpu_before
 print(f"\nTotal execution time: {end_time} seconds")
 print(f"CPU utilization: {cpu_utilization}%")
