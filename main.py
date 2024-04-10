@@ -43,7 +43,7 @@ x_test = vectorizer.transform(x_test)
 
 # Logistic Regression 
 cs = [0.01, 0.1, 1, 10]
-logreg = LogisticRegressionCV(Cs=cs, cv=5, random_state=seed, n_jobs = 2 * num_cores)
+logreg = LogisticRegressionCV(Cs=cs, cv=5, random_state=seed, n_jobs=num_cores)
 logreg.fit(x_train, y_train)
 
 # Random Forest 
@@ -55,7 +55,7 @@ param_grid = {
 }
 
 # Perform grid search for Random Forest
-grid_search = GridSearchCV(random_forest, param_grid, cv=5, n_jobs = 2 * num_cores)
+grid_search = GridSearchCV(random_forest, param_grid, cv=5, n_jobs=num_cores)
 grid_search.fit(x_train, y_train)
 
 random_forest_best = grid_search.best_estimator_
@@ -93,17 +93,16 @@ rf_test_precision = precision_score(y_test, rf_test_pred)
 logreg_test_cm = confusion_matrix(y_test, logreg_test_pred, normalize = 'all')
 rf_test_cm = confusion_matrix(y_test, rf_test_pred, normalize = 'all')
 
-# Average the coefficients across different iterations
-coefficients = np.mean(logreg.coef_, axis=0)
 
-# Get the feature names (words)
-feature_names = vectorizer.get_feature_names_out()
+coefficients = np.mean(logreg.coef_, axis=0) # Average the coefficients across different iterations
+feature_names = vectorizer.get_feature_names_out() # Get the feature names (words)
+word_coefficients = dict(zip(feature_names, coefficients)) # Create a dictionary mapping words to their coefficients
+sorted_words = sorted(word_coefficients.items(), key=lambda x: x[1], reverse=True) # Sort the words based on their coefficients in descending order
 
-# Create a dictionary mapping words to their coefficients
-word_coefficients = dict(zip(feature_names, coefficients))
 
-# Sort the words based on their coefficients in descending order
-sorted_words = sorted(word_coefficients.items(), key=lambda x: x[1], reverse=True)
+feature_importances = random_forest_best.feature_importances_ # Get feature importances
+feature_importance_dict = dict(zip(feature_names, feature_importances)) # Create a dictionary mapping feature names to their importances
+sorted_features = sorted(feature_importance_dict.items(), key=lambda x: x[1], reverse=True) # Sort the features based on their importances in descending order
 
 # Print results for logistic regression
 print("Logistic Regression:")
@@ -122,12 +121,26 @@ print("Test Precision:", rf_test_precision)
 confusion_matrix_plot(rf_test_cm, 'Random Forest')
 
 # Print the top 10 most significant words
+print("\nIn Logistic Regression:")
+print("Top 10 Most Important Features:")
 top_words = sorted_words[:10]
 for word, coefficient in top_words:
     print(word, ":", coefficient)
 
+# Print the top 10 most important features
+print("\nIn Random Forest:")
+print("Top 10 Most Important Features:")
+for feature, importance in sorted_features[:10]:
+    print(feature, ":", importance)
+    
 cpu_utilization = psutil.cpu_percent(interval=None)
 end_time = time.time() - start_time
 
 print(f"\nTotal execution time: {end_time} seconds")
 print(f"CPU utilization: {cpu_utilization}%")
+
+
+
+
+    
+   
