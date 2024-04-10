@@ -106,18 +106,18 @@ sorted_features = sorted(feature_importance_dict.items(), key=lambda x: x[1], re
 
 # Print results for logistic regression
 print("Logistic Regression:")
-print("Train Accuracy:", f"{logreg_train_acc:.2f}")
-print("Test Accuracy:", f"{logreg_test_acc:.2f}")
-print("Test Recall:", f"{logreg_test_recall:.2f}")
-print("Test Precision:", f"{logreg_test_precision:.2f}")
+print("Train Accuracy:", logreg_train_acc)
+print("Test Accuracy:", logreg_test_acc)
+print("Test Recall:", logreg_test_recall)
+print("Test Precision:", logreg_test_precision)
 confusion_matrix_plot(logreg_test_cm, 'Logistic Regression')
 
 # Print results for best random forest model
 print("\nRandom Forest:")
-print("Train Accuracy:", f"{rf_train_acc:.2f}")
-print("Test Accuracy:", f"{rf_test_acc:.2f}")
-print("Test Recall:", f"{rf_test_recall:.2f}")
-print("Test Precision:", f"{rf_test_precision:.2f}")
+print("Train Accuracy:", rf_train_acc)
+print("Test Accuracy:", rf_test_acc)
+print("Test Recall:", rf_test_recall)
+print("Test Precision:", rf_test_precision)
 confusion_matrix_plot(rf_test_cm, 'Random Forest')
 
 # Print the top 10 most significant words
@@ -125,19 +125,19 @@ print("\nIn Logistic Regression:")
 print("Top 10 Most Important Features:")
 top_words = sorted_words[:10]
 for word, coefficient in top_words:
-    print(word, ":", f"{coefficient:.4f}")
+    print(word, ":", coefficient)
 
 # Print the top 10 most important features
 print("\nIn Random Forest:")
 print("Top 10 Most Important Features:")
 for feature, importance in sorted_features[:10]:
-    print(feature, ":", f"{importance:.4f}")
-
+    print(feature, ":", importance)
+    
 cpu_utilization = psutil.cpu_percent(interval=None)
 end_time = time.time() - start_time
 
-print(f"\nTotal execution time: {end_time:.2f} seconds")
-print(f"CPU utilization: {cpu_utilization:.2f}%")
+print(f"\nTotal execution time: {end_time} seconds")
+print(f"CPU utilization: {cpu_utilization}%")
 
 
 
