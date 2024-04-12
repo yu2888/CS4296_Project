@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegressionCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, recall_score, precision_score, confusion_matrix
 from process import process
-from visualization import plot_spam_ham_count, confusion_matrix_plot
+from visualization import plot_spam_ham_count
 import time
 import psutil
 import warnings
@@ -15,6 +15,7 @@ import multiprocessing
 # Get the number of CPU cores
 num_cores = multiprocessing.cpu_count()
 print("Number of CPU core: ", num_cores)
+
 # Disable all warnings
 warnings.filterwarnings("ignore")
 
@@ -90,15 +91,10 @@ rf_test_recall = recall_score(y_test, rf_test_pred)
 logreg_test_precision = precision_score(y_test, logreg_test_pred)
 rf_test_precision = precision_score(y_test, rf_test_pred)
 
-logreg_test_cm = confusion_matrix(y_test, logreg_test_pred, normalize = 'all')
-rf_test_cm = confusion_matrix(y_test, rf_test_pred, normalize = 'all')
-
-
 coefficients = np.mean(logreg.coef_, axis=0) # Average the coefficients across different iterations
 feature_names = vectorizer.get_feature_names_out() # Get the feature names (words)
 word_coefficients = dict(zip(feature_names, coefficients)) # Create a dictionary mapping words to their coefficients
 sorted_words = sorted(word_coefficients.items(), key=lambda x: x[1], reverse=True) # Sort the words based on their coefficients in descending order
-
 
 feature_importances = random_forest_best.feature_importances_ # Get feature importances
 feature_importance_dict = dict(zip(feature_names, feature_importances)) # Create a dictionary mapping feature names to their importances
@@ -110,7 +106,6 @@ print("Train Accuracy:", logreg_train_acc)
 print("Test Accuracy:", logreg_test_acc)
 print("Test Recall:", logreg_test_recall)
 print("Test Precision:", logreg_test_precision)
-confusion_matrix_plot(logreg_test_cm, 'Logistic Regression')
 
 # Print results for best random forest model
 print("\nRandom Forest:")
@@ -118,7 +113,6 @@ print("Train Accuracy:", rf_train_acc)
 print("Test Accuracy:", rf_test_acc)
 print("Test Recall:", rf_test_recall)
 print("Test Precision:", rf_test_precision)
-confusion_matrix_plot(rf_test_cm, 'Random Forest')
 
 # Print the top 10 most significant words
 print("\nIn Logistic Regression:")
