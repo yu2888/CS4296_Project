@@ -22,18 +22,3 @@ def plot_spam_ham_count(df):
     plt.xticks([0, 1], ['Ham', 'Spam'])
 
     plt.show()
-
-def confusion_matrix_plot(matrix, model_name):
-    # Plot the confusion matrix using a heatmap
-    plt.figure(figsize=(5,5))
-    ax= plt.subplot()
-    sns.set(font_scale=1)
-    sns.heatmap(matrix, annot=True, ax=ax, cmap='Blues')
-
-    # Set the axis labels, title, and tick labels for the plot
-    ax.set_xlabel('Predicted label', size=10)
-    ax.set_ylabel('True label', size=10)
-    ax.set_title(model_name, size=15) 
-    ax.xaxis.set_ticklabels(["ham","spam"], size=15)
-    ax.yaxis.set_ticklabels(["ham","spam"], size=15)
-    plt.show()
